@@ -10,7 +10,7 @@ Functionalities of [v1.1.1](https://github.com/sablier-labs/flow/releases/tag/v1
 
 ## Working Deployment
 
-### Verify FlowNFTDescriptor Contract
+### FlowNFTDescriptor Contract
 
 Explorer link: https://blockscout-passet-hub.parity-testnet.parity.io/address/0x87BF2eE4101D93a345d1931d58Fa01e0BB0D0754
 
@@ -18,7 +18,7 @@ Explorer link: https://blockscout-passet-hub.parity-testnet.parity.io/address/0x
 npx hardhat verify --network passet-hub 0x87BF2eE4101D93a345d1931d58Fa01e0BB0D0754
 ```
 
-### Verify SablierFlow Contract
+### SablierFlow Contract
 
 Explorer link: https://blockscout-passet-hub.parity-testnet.parity.io/address/0x4002b6408C66650FC98Cea235Ac23BAc608910fd
 
