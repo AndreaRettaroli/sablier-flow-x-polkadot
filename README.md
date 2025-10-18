@@ -28,15 +28,35 @@ npx hardhat verify --network passet-hub 0x4002b6408C66650FC98Cea235Ac23BAc608910
 
 ### Setup instructions
 
+#### Install dependencies
+
+```bash
+bun install
+```
+
 #### Wallet setup
 
 you need a wallet to deploy the contracts.
 
 ```
-bun i viem --dev
+bun add viem --dev
 bun run generate-wallet
 ```
 
 Take the address in the console and use it in the [fauced](https://faucet.polkadot.io/) to get founds on Paseo testnet.
 
 Take the private key and create a `.env` file folliwing the `.env.example` style and replace the `PRIVATE_KEY=<generated-private-key>` with the private key and `ETH_FROM=<generated-wallet-address>`.
+
+
+#### Compile contract
+
+```bash
+bun hardhat:compile
+```
+
+#### Deploy
+
+```bash
+bun hardhat:deploy --network passetHub
+```
+
