@@ -1,116 +1,42 @@
-# Sablier Flow [![Github Actions][gha-badge]][gha] [![Coverage][codecov-badge]][codecov] [![Foundry][foundry-badge]][foundry] [![Discord][discord-badge]][discord] [![Twitter][twitter-badge]][twitter]
+# Sablier/Flow x Polkadot
 
-[gha]: https://github.com/sablier-labs/flow/actions
-[gha-badge]: https://github.com/sablier-labs/flow/actions/workflows/ci.yml/badge.svg
-[codecov]: https://codecov.io/gh/sablier-labs/flow
-[codecov-badge]: https://codecov.io/gh/sablier-labs/flow/branch/main/graph/badge.svg
-[discord]: https://discord.gg/bSwRCwWRsT
-[discord-badge]: https://img.shields.io/discord/659709894315868191
-[foundry]: https://getfoundry.sh
-[foundry-badge]: https://img.shields.io/badge/Built%20with-Foundry-FFDB1C.svg
-[twitter-badge]: https://img.shields.io/twitter/follow/Sablier
-[twitter]: https://x.com/Sablier
+## Project description
 
-In-depth documentation is available at [docs.sablier.com](https://docs.sablier.com).
+In this project we decided to migrate [Sablier/Flow](https://github.com/sablier-labs/flow) contract on Polkadot Testnet Paseo as part of the [Polkadot Porting Existing Smart Contracts](https://ethrome25.notion.site/Prizes-and-Bounties-160d00c099af81aba88cd436e7acf94f) track of [EthRome2025](https://www.ethrome.org/).
 
-## Background
+## Comparative Analysis
 
-Sablier Flow is a debt tracking protocol that tracks tokens owed between two parties, enabling open-ended token
-streaming. A Flow stream is characterized by its rate per second (rps). The relationship between the amount owed and
-time elapsed is linear and defined as:
+Functionalities of [v1.1.1](https://github.com/sablier-labs/flow/releases/tag/v1.1.1) are entirely preserved and migrated.
 
-```math
-\text{amount owed} = rps \cdot \text{elapsed time}
+## Working Deployment
+
+### Verify FlowNFTDescriptor Contract
+
+Explorer link: https://blockscout-passet-hub.parity-testnet.parity.io/address/0x87BF2eE4101D93a345d1931d58Fa01e0BB0D0754
+
+```bash
+npx hardhat verify --network passet-hub 0x87BF2eE4101D93a345d1931d58Fa01e0BB0D0754
 ```
 
-Sablier Flow can be used in several areas of everyday finance, such as payroll, subscriptions, grant distributions,
-insurance premiums, loans interest, token ESOPs etc. If you are looking for vesting and airdrops, please refer to our
-[Lockup](https://github.com/sablier-labs/v2-core/) protocol.
+### Verify SablierFlow Contract
 
-## Features
+Explorer link: https://blockscout-passet-hub.parity-testnet.parity.io/address/0x4002b6408C66650FC98Cea235Ac23BAc608910fd
 
-1. **Open-ended:** A stream can be created with no specific end time. It runs indefinitely until it is paused or voided.
-2. **Top-ups:** No upfront deposit requirements. A stream can be funded with any amount, at any time, by anyone, in full
-   or partially.
-3. **Pause:** A stream can be paused by the sender and can later be restarted without losing track of previously accrued
-   debt.
-4. **Void:** A voided stream cannot be restarted anymore. Voiding an insolvent stream forfeits the uncovered debt.
-   Either the sender or the recipient can void a stream at any time.
-5. **Refund:** Unstreamed amount can be refunded back to the sender at any time.
-6. **Withdraw:** A publicly callable function as long as `to` is set to the recipient. A stream's recipient is allowed
-   to withdraw funds to any address.
-
-## Install
-
-### Node.js
-
-This is the recommended approach.
-
-Install Flow using your favorite package manager, e.g. with Bun:
-
-```shell
-bun add @sablier/flow
+```bash
+npx hardhat verify --network passet-hub 0x4002b6408C66650FC98Cea235Ac23BAc608910fd 0xb1bEF51ebCA01EB12001a639bDBbFF6eEcA12B9F 0x87BF2eE4101D93a345d1931d58Fa01e0BB0D0754
 ```
 
-### Git Submodules
+### Setup instructions
 
-This installation method is not recommended, but it is available for those who prefer it.
+#### Wallet setup
 
-Install the submodule using Forge:
+you need a wallet to deploy the contracts.
 
-```shell
-forge install sablier-labs/flow
+```
+bun i viem --dev
+bun run generate-wallet
 ```
 
-Then, install the project's dependencies:
+Take the address in the console and use it in the [fauced](https://faucet.polkadot.io/) to get founds on Paseo testnet.
 
-```shell
-forge install sablier-labs/evm-utils@v1.0.0 OpenZeppelin/openzeppelin-contracts@v5.3.0 PaulRBerg/prb-math@v4.1.0
-```
-
-### Branching Tree Technique
-
-You may notice that some test files are accompanied by `.tree` files. This is because we are using Branching Tree
-Technique and [Bulloak](https://bulloak.dev/).
-
-## Usage
-
-This is just a glimpse of Sablier Flow. For more guides and examples, see the [documentation](https://docs.sablier.com).
-
-```solidity
-import { ISablierFlow } from "@sablier/flow/src/interfaces/ISablierFlow.sol";
-
-contract MyContract {
-  ISablierFlow immutable flow;
-
-  function doSomethingWithFlow(uint256 streamId) external {
-    uint128 totalDebt = flow.totalDebtOf(streamId);
-    // ...
-  }
-}
-```
-
-## Deployments
-
-The list of all deployment addresses can be found [here](https://docs.sablier.com/guides/flow/deployments).
-
-## Security
-
-The codebase has undergone rigorous audits by leading security experts from Cantina, as well as independent auditors.
-For a comprehensive list of all audits conducted, please click [here](https://github.com/sablier-labs/audits).
-
-For any security-related concerns, please refer to the [SECURITY](./SECURITY.md) policy. This repository is subject to a
-bug bounty program per the terms outlined in the aforementioned policy.
-
-## Contributing
-
-Feel free to dive in! [Open](https://github.com/sablier-labs/flow/issues/new) an issue,
-[start](https://github.com/sablier-labs/flow/discussions/new) a discussion or submit
-[a PR](https://github.com/sablier-labs/flow/compare). For any concerns or feedback, please join our
-[Discord server](https://discord.gg/bSwRCwWRsT).
-
-Refer to [CONTRIBUTING](./CONTRIBUTING.md) guidelines if you wish to create a PR.
-
-## License
-
-See [LICENSE.md](./LICENSE.md).
+Take the private key and create a `.env` file folliwing the `.env.example` style and replace the `PRIVATE_KEY=<generated-private-key>` with the private key and `ETH_FROM=<generated-wallet-address>`.
