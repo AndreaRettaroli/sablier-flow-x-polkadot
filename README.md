@@ -152,4 +152,8 @@ And the deployment succeed.
 
 ## Feedbacks
 
-One of the biggest difficulties we encountered was not having the `foundry compiler` implementation ready. Foundry is one of the most popular and effiecient complier on the market ad the moment and have that implementation fully functional would accellerate the processes of migrating existing EVM contracts on Polkadot.
+One of the biggest difficulties we encountered was not having the `foundry compiler` implementation ready. Foundry is one of the most popular and efficient complier on the market ad the moment and have that implementation fully functional would accelerate the processes of migrating existing EVM contracts on Polkadot.
+
+#### Tweet
+
+https://x.com/Feka_7heaven/status/1979653993371705455?t=R9ZFI8qdZli5RWbiGKQYYg&s=19
